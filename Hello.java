@@ -1,7 +1,5 @@
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 class Hello{
     public static void main(String[] args) {
@@ -11,19 +9,20 @@ class Hello{
             new Person("Thomas", "Carlyle", 51),
             new Person("Charlotte", "Bronte", 45),
             new Person("Mather", "Arnold", 39)
-        );       
-        //lambda version
-        printConditionaly(persons, p -> true, p -> System.out.println(p));
-
-        //method refference version
-        printConditionaly(persons, p -> true, System.out::println);     //p -> method(p)
-    }
-
-    private static void printConditionaly(List<Person> persons, Predicate<Person> predicate, Consumer<Person> consumer) {
-        for(Person p:persons){
-            if(predicate.test(p)){
-                consumer.accept(p);
-            }
+        );
+        System.out.println("using for loop");
+        for(int i = 0; i < persons.size(); i++){
+            System.out.println(persons);
         }
+        System.out.println("using enhanced for loop");
+        for(Person p:persons){
+            System.out.println(p);
+        }
+        //with method forEach can possibly use thread
+        System.out.println("using method forEach loop");
+        persons.forEach(p -> System.out.println(p));
+
+        System.out.println("using forEach loop writen with method reference");
+        persons.forEach(System.out::println);
     }
 }
