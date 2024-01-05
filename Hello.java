@@ -11,8 +11,9 @@ class Hello{
             new Person("Mather", "Arnold", 39)
         );
 
-        persons.stream()
+        long count = persons.stream()
             .filter(p -> p.getLastName().startsWith("C"))
-            .forEach(p -> System.out.println(p.getFirstName()));
+            .count();
+        System.out.println(count);
     }
 }
