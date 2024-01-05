@@ -27,13 +27,18 @@ class Hello{
         printAll(persons);
 
         System.out.println("spacer");
-        
-        printLastNameBeginWithC(persons);
+
+        printConditionaly(persons, new Condition() {
+            @Override
+            public boolean test(Person p) {
+                return p.getFirstName().startsWith("C");
+            }            
+        });
     }
 
-    private static void printLastNameBeginWithC(List<Person> persons) {
+    private static void printConditionaly(List<Person> persons, Condition condition) {
         for(Person p:persons){
-            if(p.getLastName().startsWith("C")){
+            if(condition.test(p)){
                 System.out.println(p);
             }
         }
@@ -43,5 +48,9 @@ class Hello{
         for(Person p:persons){
             System.out.println(p);
         }
+    }
+
+    interface Condition {
+        boolean test(Person p);
     }
 }
