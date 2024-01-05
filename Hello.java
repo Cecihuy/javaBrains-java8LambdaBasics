@@ -4,16 +4,10 @@ public class Hello{
     }
     public static void main(String[] args) {
         Hello thisReferenceExample = new Hello();
-        thisReferenceExample.doProcess(10, new Process() {
-            @Override
-            public void process(int i){
-                System.out.println("value of i is " + i);
-                System.out.println(this);   //'this' keyword is reffer to new Process
-            }
-            @Override
-            public String toString(){
-                return "This is the anonymous inner class";
-            }
+        //2. it is likely reffering here.
+        thisReferenceExample.doProcess(10, i -> {
+            System.out.println("value of i is " + i);
+            System.out.println(this);   //1. 'this' keyword is reffer to outside of lambda by design
         });
     }
 }
