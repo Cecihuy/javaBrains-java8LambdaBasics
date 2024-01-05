@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 /*
  * 1. Sort list by last name
@@ -19,17 +20,17 @@ class Hello{
 
         Collections.sort(persons, (o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 
-        printConditionaly(persons, p -> true);
+        performConditionaly(persons, p -> true, p -> System.out.println(p));
 
         System.out.println("spacer");
 
-        printConditionaly(persons, p -> p.getFirstName().startsWith("C"));
+        performConditionaly(persons, p -> p.getFirstName().startsWith("C"), p -> System.out.println(p));        
     }
 
-    private static void printConditionaly(List<Person> persons, Predicate<Person> predicate) {
+    private static void performConditionaly(List<Person> persons, Predicate<Person> predicate, Consumer<Person> consumer) {
         for(Person p:persons){
             if(predicate.test(p)){
-                System.out.println(p);
+                consumer.accept(p);
             }
         }
     }
