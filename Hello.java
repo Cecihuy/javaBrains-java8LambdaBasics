@@ -5,22 +5,22 @@ class Hello{
         int[] someNumbers = {1, 2, 3, 4};
         int key = 0;
 
-        process(someNumbers, key, (k, v) -> {
-            try{
-                System.out.println(k / v);
-            } catch(ArithmeticException e){
-                System.out.println("an arithmetic exception happened");
-            }
-        });
+        process(someNumbers, key, wrapperLambda((k, v) -> System.out.println(k / v)));
     }
 
     private static void process(int[] someNumbers, int key, BiConsumer<Integer,Integer> biConsumer) {
         for(int efl:someNumbers){
-            try{
-                biConsumer.accept(efl, key);
-            } catch(ArithmeticException e){
-
-            }
+            biConsumer.accept(efl, key);           
         }
-    }    
+    }
+
+    private static BiConsumer<Integer, Integer> wrapperLambda(BiConsumer<Integer,Integer> biConsumer){
+        return (a, b) -> {
+            try{
+                biConsumer.accept(a, b);
+            } catch(ArithmeticException e){
+                System.out.println("exception in wrapper lambda");
+            }
+        };
+    }
 }
