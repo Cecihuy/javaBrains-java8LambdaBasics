@@ -1,8 +1,10 @@
 class Hello{
     public static void main(String[] args) {
-        StringLength myLamb = s -> s.length();
+        printLambda(s -> s.length());        
+    }
 
-        System.out.println(myLamb.getLength("Hello lambda"));
+    public static void printLambda(StringLength sl){
+        System.out.println(sl.getLength("Hello Lambda"));
     }
 
     public interface StringLength {
