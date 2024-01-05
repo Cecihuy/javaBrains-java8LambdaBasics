@@ -1,13 +1,15 @@
 class Hello{
     public static void main(String[] args) {
-        printLambda(s -> s.length());        
-    }
+        Thread myThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("printed inside anonymous innerclass");
+            }            
+        });
 
-    public static void printLambda(StringLength sl){
-        System.out.println(sl.getLength("Hello Lambda"));
-    }
+        myThread.run();
 
-    public interface StringLength {
-        int getLength(String str);
+        Thread myLamdaThread = new Thread(() -> System.out.println("printed inside lambda"));
+        myLamdaThread.run();        
     }
 }
