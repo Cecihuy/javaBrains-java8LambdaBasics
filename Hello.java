@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 /*
  * 1. Sort list by last name
  * 2. Create a method that prints all elements in the list
@@ -25,15 +26,11 @@ class Hello{
         printConditionaly(persons, p -> p.getFirstName().startsWith("C"));
     }
 
-    private static void printConditionaly(List<Person> persons, Condition condition) {
+    private static void printConditionaly(List<Person> persons, Predicate<Person> predicate) {
         for(Person p:persons){
-            if(condition.test(p)){
+            if(predicate.test(p)){
                 System.out.println(p);
             }
         }
-    }
-
-    interface Condition {
-        boolean test(Person p);
     }
 }
