@@ -1,26 +1,23 @@
-import java.util.function.BiConsumer;
-
-class Hello{
+public class Hello{
     public static void main(String[] args) {
-        int[] someNumbers = {1, 2, 3, 4};
-        int key = 0;
+        int a = 10;
+        int b = 20;
 
-        process(someNumbers, key, wrapperLambda((k, v) -> System.out.println(k / v)));
+        //if you create lambda, no way to assign b=40. it is called closure
+        doProcess(a, new Process() {    
+            @Override
+            public void process(int i) {
+                //b=40;
+                System.out.println(i + b);  //in this case, 'b' is final
+            }            
+        });
     }
 
-    private static void process(int[] someNumbers, int key, BiConsumer<Integer,Integer> biConsumer) {
-        for(int efl:someNumbers){
-            biConsumer.accept(efl, key);           
-        }
+    public static void doProcess(int i, Process p){
+        p.process(i);
     }
 
-    private static BiConsumer<Integer, Integer> wrapperLambda(BiConsumer<Integer,Integer> biConsumer){
-        return (a, b) -> {
-            try{
-                biConsumer.accept(a, b);
-            } catch(ArithmeticException e){
-                System.out.println("exception in wrapper lambda");
-            }
-        };
+    interface Process{
+        void process(int i);
     }
 }
