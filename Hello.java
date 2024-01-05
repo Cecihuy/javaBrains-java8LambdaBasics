@@ -1,6 +1,5 @@
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 /*
  * 1. Sort list by last name
@@ -17,23 +16,13 @@ class Hello{
             new Person("Mather", "Arnold", 39)
         );
 
-        Collections.sort(persons, new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                return o1.getLastName().compareTo(o2.getLastName());
-            }            
-        });
+        Collections.sort(persons, (o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
 
-        printAll(persons);
+        printConditionaly(persons, p -> true);
 
         System.out.println("spacer");
 
-        printConditionaly(persons, new Condition() {
-            @Override
-            public boolean test(Person p) {
-                return p.getFirstName().startsWith("C");
-            }            
-        });
+        printConditionaly(persons, p -> p.getFirstName().startsWith("C"));
     }
 
     private static void printConditionaly(List<Person> persons, Condition condition) {
@@ -41,12 +30,6 @@ class Hello{
             if(condition.test(p)){
                 System.out.println(p);
             }
-        }
-    }
-
-    private static void printAll(List<Person> persons) {
-        for(Person p:persons){
-            System.out.println(p);
         }
     }
 
