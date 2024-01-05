@@ -4,9 +4,16 @@ class Hello{
     }
     public static void main(String[] args) {
         Hello greeter = new Hello();
-        HelloWorldGreeting helloWorldGreeting = new HelloWorldGreeting();
-        greeter.greet(helloWorldGreeting);
+
+        Greeting innerClassGreeting = new Greeting() {
+            public void perform(){
+                System.out.println("Hello world!");
+            }
+        };
 
         Greeting myLambdaFunction = () -> System.out.println("Hello world!");
+        
+        greeter.greet(innerClassGreeting);
+        greeter.greet(myLambdaFunction);
     }    
 }
